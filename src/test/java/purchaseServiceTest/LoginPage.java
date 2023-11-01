@@ -15,6 +15,7 @@ public class LoginPage extends PurchaseServiceTests{
     WebElement revealed = driver.findElement(By.xpath("//div[@id='authServiceWidget']"));
     WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='authServiceWidget']")));
+
     driver.findElement(By.xpath("//div[@id='authServiceWidget']")).click();
     }
 }
