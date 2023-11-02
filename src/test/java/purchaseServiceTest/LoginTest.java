@@ -12,6 +12,7 @@ public class LoginTest extends BaseTest{
     @Test
     public void loginToTheSystem(){
         getLoginPage().implicitWait(TIME_TO_WAIT);
+
         getLoginPage().clickOnHFNButton();
         getLoginPage().clickOnLoginTextFieldAndEnterLogin(LOGIN);
         getLoginPage().clickOnPasswordTextFieldAndEnterPassword(PASSWORD);
