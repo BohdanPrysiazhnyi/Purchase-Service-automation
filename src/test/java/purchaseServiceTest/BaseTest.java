@@ -49,11 +49,8 @@ public class BaseTest {
         return new LoginPage(getDriver());
     }
 
-    public BackOfficeDashboardPage backOfficeDashboardPage(){
+    public BackOfficeDashboardPage getBackOfficeDashboardPage(){
         return new BackOfficeDashboardPage(getDriver());
     }
 
-    public void waitForElementPresent(final String ELEMENT){
-       // wait = new WebDriverWait();
-    }
 }

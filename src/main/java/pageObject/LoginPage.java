@@ -3,6 +3,7 @@ package pageObject;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.security.Key;
 
@@ -10,31 +11,41 @@ import static org.openqa.selenium.By.*;
 
 public class LoginPage extends BasePagePurchaseService{
 
-    private static final String HFN_BUTTON = "//div[@id='authServiceWidget']";
-    private static final String LOGIN_TEXT_FIELD = "//input[@name='username']";
-    private static final String PASSWORD_TEXT_FIELD ="//input[@name='password']";
-    private static final String LOGIN_BUTTON = "//button[@class='log-btn']";
+
+    @FindBy(xpath = "//div[@id='authServiceWidget']")
+    private WebElement hfnButton;
+
+    @FindBy(xpath = "//input[@name='username']")
+    private WebElement loginTextField;
+
+    @FindBy(xpath = "//input[@name='password']")
+    private WebElement passwordTextField;
+
+    @FindBy(xpath = "//button[@class='log-btn']")
+    private WebElement loginButton;
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
 
     public void clickOnHFNButton(){
-        driver.findElement(xpath(HFN_BUTTON)).click();
+
+        hfnButton.click();
     }
 
     public void clickOnLoginTextFieldAndEnterLogin(final String LOGIN){
-        driver.findElement(xpath(LOGIN_TEXT_FIELD)).clear();
-        driver.findElement(xpath(LOGIN_TEXT_FIELD)).sendKeys(LOGIN, Keys.TAB);
+        loginTextField.clear();
+        loginTextField.sendKeys(LOGIN);
     }
 
     public void clickOnPasswordTextFieldAndEnterPassword(final String PASSWORD){
-        driver.findElement(xpath(PASSWORD_TEXT_FIELD)).clear();
-        driver.findElement(xpath(PASSWORD_TEXT_FIELD)).sendKeys(PASSWORD);
+        passwordTextField.clear();
+        passwordTextField.sendKeys(PASSWORD);
     }
 
     public void clickOnLoginButton(){
-        driver.findElement(xpath(LOGIN_BUTTON)).click();
+
+        loginButton.click();
     }
 
     }
