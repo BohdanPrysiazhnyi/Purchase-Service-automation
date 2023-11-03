@@ -9,14 +9,19 @@ public class LoginTest extends BaseTest{
 
 
 
+
+
+
     @Test
     public void loginToTheSystem(){
         getLoginPage().implicitWait(TIME_TO_WAIT);
+
         getLoginPage().clickOnHFNButton();
         getLoginPage().clickOnLoginTextFieldAndEnterLogin(LOGIN);
         getLoginPage().clickOnPasswordTextFieldAndEnterPassword(PASSWORD);
         getLoginPage().clickOnLoginButton();
-        getLoginPage().waitForPageLoadComplete(TIME_TO_WAIT);
-        getLoginPage().implicitWait(TIME_TO_WAIT);
+        getBackOfficeDashboardPage().waitForAjaxToComplete(30);
+        getLoginPage().waitVisibilityOfElement(30,getBackOfficeDashboardPage().getChangeServiceButton());
+        getBackOfficeDashboardPage().clickOnChangeServiceButton();
     }
 }

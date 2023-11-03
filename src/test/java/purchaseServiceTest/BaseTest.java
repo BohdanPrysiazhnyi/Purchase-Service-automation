@@ -7,8 +7,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
-import pageObject.BackOfficeDashboardPage;
-import pageObject.LoginPage;
+import pageFactory.BackOfficeDashboardPage;
+import pageFactory.LoginPage;
 
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 
@@ -49,11 +49,8 @@ public class BaseTest {
         return new LoginPage(getDriver());
     }
 
-    public BackOfficeDashboardPage backOfficeDashboardPage(){
+    public BackOfficeDashboardPage getBackOfficeDashboardPage(){
         return new BackOfficeDashboardPage(getDriver());
     }
 
-    public void waitForElementPresent(final String ELEMENT){
-       // wait = new WebDriverWait();
-    }
 }
