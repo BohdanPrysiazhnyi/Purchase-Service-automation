@@ -3,7 +3,7 @@ package purchaseServiceTest;
 import junit.framework.Assert;
 import org.testng.annotations.Test;
 
-public class LoginTest extends BaseTest{
+public class SmokeTests extends BaseTest{
     private static final String LOGIN ="test.testsson";
     private static final String PASSWORD= "pt72r=P+=_";
     private static final long TIME_TO_WAIT = 30;
