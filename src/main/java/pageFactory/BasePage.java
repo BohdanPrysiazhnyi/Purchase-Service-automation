@@ -9,10 +9,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class BasePagePurchaseService {
+public class BasePage {
     WebDriver driver;
 
-    public BasePagePurchaseService(WebDriver driver) {
+    public BasePage(WebDriver driver) {
 
         this.driver = driver;
         PageFactory.initElements(driver,this);

@@ -1,0 +1,1 @@
+{"uuid":"e839e533-ba3c-451c-b6df-f29ee6a2cf68","name":"Purchase-Service-automation","children":["793d0c44-6a1f-4053-b240-fc2463e08e53"],"befores":[{"name":"profileSetUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1699018208201,"stop":1699018208537}],"afters":[],"start":1699018208189,"stop":1699018224007}

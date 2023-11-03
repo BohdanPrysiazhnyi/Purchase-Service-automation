@@ -1,5 +1,6 @@
 package purchaseServiceTest;
 
+import junit.framework.Assert;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest{
@@ -13,15 +14,18 @@ public class LoginTest extends BaseTest{
 
 
     @Test
-    public void loginToTheSystem(){
+    public void verifyThatAllDefaultWidgetsAreDisplayedOnTheDashboardPageOnPurchaseService(){
         getLoginPage().implicitWait(TIME_TO_WAIT);
 
         getLoginPage().clickOnHFNButton();
         getLoginPage().clickOnLoginTextFieldAndEnterLogin(LOGIN);
         getLoginPage().clickOnPasswordTextFieldAndEnterPassword(PASSWORD);
         getLoginPage().clickOnLoginButton();
-        getBackOfficeDashboardPage().waitForAjaxToComplete(30);
-        getLoginPage().waitVisibilityOfElement(30,getBackOfficeDashboardPage().getChangeServiceButton());
+        getBackOfficeDashboardPage().waitUntilElementToBeClickable(30,getBackOfficeDashboardPage().getChangeServiceButton());
         getBackOfficeDashboardPage().clickOnChangeServiceButton();
+        getBackOfficeDashboardPage().clickOnPurchaseServiceButton();
+        getPurchaseServiceDashboardPage().waitUntilElementToBeClickable(30, getPurchaseServiceDashboardPage().widget());
+
+        Assert.assertEquals(8, getPurchaseServiceDashboardPage().quantityOfDisplayedWidgets());
     }
 }
