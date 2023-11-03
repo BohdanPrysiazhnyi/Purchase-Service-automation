@@ -1,13 +1,8 @@
-package pageObject;
+package pageFactory;
 
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.security.Key;
-
-import static org.openqa.selenium.By.*;
 
 public class LoginPage extends BasePagePurchaseService{
 
