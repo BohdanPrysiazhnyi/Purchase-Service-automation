@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeTest;
 import pageFactory.BackOfficeDashboardPage;
 import pageFactory.LoginPage;
 import pageFactory.PurchaseServiceDashboardPage;
+import pageFactory.PurchaseServiceGeneral;
 
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 
@@ -17,7 +18,7 @@ public class BaseTest {
 
     private WebDriver driver;
     private WebDriverWait wait;
-    private static final String PURCHASE_SERVICE_URL = "http://dashboard-9460.trademax-test.com/spa/login";
+    private static final String PURCHASE_SERVICE_URL = "http://dashboard-9460.trademax-test.com/page/dashboard";
 
 
     @BeforeTest
@@ -32,15 +33,15 @@ public class BaseTest {
         driver.get(PURCHASE_SERVICE_URL);
     }
 
-    @AfterMethod
-    public void tearDown(){
-        driver.close();
-    }
-
-    @AfterTest
-    public void closeAllWindows(){
-        driver.quit();
-    }
+//    @AfterMethod
+//    public void tearDown(){
+//        driver.close();
+//    }
+//
+//    @AfterTest
+//    public void closeAllWindows(){
+//        driver.quit();
+//    }
 
     public WebDriver getDriver(){
         return driver;
@@ -54,5 +55,6 @@ public class BaseTest {
         return new BackOfficeDashboardPage(getDriver());
     }
     public PurchaseServiceDashboardPage getPurchaseServiceDashboardPage(){return new PurchaseServiceDashboardPage(getDriver());}
+    public PurchaseServiceGeneral getPurchaseServiceGeneral(){return new PurchaseServiceGeneral(getDriver());}
 
 }

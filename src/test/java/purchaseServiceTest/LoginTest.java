@@ -25,7 +25,7 @@ public class LoginTest extends BaseTest{
         getBackOfficeDashboardPage().clickOnChangeServiceButton();
         getBackOfficeDashboardPage().clickOnPurchaseServiceButton();
         getPurchaseServiceDashboardPage().waitUntilElementToBeClickable(30, getPurchaseServiceDashboardPage().widget());
-
+        getPurchaseServiceGeneral().clickOnPurchaseOrdersListPage();
         Assert.assertEquals(8, getPurchaseServiceDashboardPage().quantityOfDisplayedWidgets());
     }
 }
