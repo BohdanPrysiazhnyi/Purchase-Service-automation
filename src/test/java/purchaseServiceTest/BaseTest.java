@@ -18,7 +18,7 @@ public class BaseTest {
 
     private WebDriver driver;
     private WebDriverWait wait;
-    private static final String PURCHASE_SERVICE_URL = "http://dashboard-9460.trademax-test.com/page/dashboard";
+    private static final String PURCHASE_SERVICE_URL = "http://dashboard-9460.trademax-test.com";
 
 
     @BeforeTest
@@ -33,15 +33,15 @@ public class BaseTest {
         driver.get(PURCHASE_SERVICE_URL);
     }
 
-//    @AfterMethod
-//    public void tearDown(){
-//        driver.close();
-//    }
-//
-//    @AfterTest
-//    public void closeAllWindows(){
-//        driver.quit();
-//    }
+    @AfterMethod
+    public void tearDown(){
+        driver.close();
+    }
+
+    @AfterTest
+    public void closeAllWindows(){
+        driver.quit();
+    }
 
     public WebDriver getDriver(){
         return driver;
