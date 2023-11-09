@@ -1,5 +1,6 @@
 package pageFactory;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,9 +23,10 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-
+    public boolean isHFNButtonVisible(){
+        return hfnButton.isDisplayed();
+    }
     public void clickOnHFNButton(){
-
         hfnButton.click();
     }
 
@@ -41,6 +43,11 @@ public class LoginPage extends BasePage {
     public void clickOnLoginButton(){
 
         loginButton.click();
+    }
+
+
+    public void click(){
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click", loginButton);
     }
 
     }

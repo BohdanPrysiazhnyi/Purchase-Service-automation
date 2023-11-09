@@ -24,7 +24,7 @@ public class LoginTest extends BaseTest{
     @Test
     public void verifyThatAllDefaultWidgetsAreDisplayedOnTheDashboardPageOnPurchaseService(){
         getLoginPage().implicitWait(TIME_TO_WAIT);
-
+        Assert.assertTrue(getLoginPage().isHFNButtonVisible());
         getLoginPage().clickOnHFNButton();
         getLoginPage().clickOnLoginTextFieldAndEnterLogin(LOGIN);
         getLoginPage().clickOnPasswordTextFieldAndEnterPassword(PASSWORD);
