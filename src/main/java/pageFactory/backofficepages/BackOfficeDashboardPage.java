@@ -1,8 +1,9 @@
-package pageFactory;
+package pageFactory.backofficepages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pageFactory.BasePage;
 
 public class BackOfficeDashboardPage extends BasePage {
 

@@ -1,10 +1,11 @@
-package pageFactory;
+package pageFactory.purchaseservicepages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pageFactory.BasePage;
 
-public class PurchaseServiceGeneral extends BasePage{
+public class PurchaseServiceGeneral extends BasePage {
     public PurchaseServiceGeneral(WebDriver driver) {
         super(driver);
     }
