@@ -22,9 +22,10 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-
+    public void openLoginPage(String url) {
+        driver.get(url);
+    }
     public void clickOnHFNButton(){
-
         hfnButton.click();
     }
 
