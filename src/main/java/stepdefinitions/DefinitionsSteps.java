@@ -29,6 +29,8 @@ public class DefinitionsSteps {
 
     WebDriver driver;
 
+    private static int TIME_TO_WAIT = 30;
+
 
     @Before
     public void setUp(){
@@ -50,15 +52,18 @@ public class DefinitionsSteps {
 
     @When("User click on HFN login button")
     public void userClickOnHFNLoginButton() {
+        loginPage.waitUntilElementToBeClickable(TIME_TO_WAIT,loginPage.getHfnButton());
         loginPage.clickOnHFNButton();
     }
 
     @And("User click on Login text field and enter {string}")
     public void userClickOnLoginTextFieldAndEnter(String login) {
+        loginPage.clickOnLoginTextFieldAndEnterLogin(login);
     }
 
     @And("User click on Password text field and enter {string}")
     public void userClickOnPasswordTextFieldAndEnter(String password) {
+        loginPage.clickOnPasswordTextFieldAndEnterPassword(password);
     }
 
 
@@ -67,5 +72,9 @@ public class DefinitionsSteps {
     }
 
 
-
+    @And("User click on login button")
+    public void userClickOnLoginButton() {
+        loginPage.waitUntilElementToBeClickable(TIME_TO_WAIT,loginPage.getLoginButton());
+        loginPage.clickOnLoginButton();
+    }
 }

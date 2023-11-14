@@ -9,6 +9,7 @@ Feature: Smoke
     When User click on HFN login button
     And User click on Login text field and enter '<login>'
     And User click on Password text field and enter '<password>'
+    And User click on login button
     Then User verify that login to the system is successful
 
     Examples:

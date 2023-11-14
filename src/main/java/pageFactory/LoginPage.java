@@ -28,6 +28,8 @@ public class LoginPage extends BasePage {
     public void clickOnHFNButton(){
         hfnButton.click();
     }
+    public WebElement getHfnButton(){return hfnButton;}
+    public WebElement getLoginButton(){return loginButton;}
 
     public void clickOnLoginTextFieldAndEnterLogin(final String LOGIN){
         loginTextField.clear();
