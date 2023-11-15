@@ -7,6 +7,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import manager.PageFactoryManager;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pageFactory.LoginPage;
@@ -29,7 +30,7 @@ public class DefinitionsSteps {
 
     WebDriver driver;
 
-    private static int TIME_TO_WAIT = 30;
+    private static int TIME_TO_WAIT = 40;
 
 
     @Before
@@ -69,6 +70,9 @@ public class DefinitionsSteps {
 
     @Then("User verify that login to the system is successful")
     public void userVerifyThatLoginToTheSystemIsSuccessful() {
+        backOfficeDashboardPage = new BackOfficeDashboardPage(driver);
+        backOfficeDashboardPage.waitUntilElementToBeClickable(TIME_TO_WAIT,backOfficeDashboardPage.getAccountButton());
+        Assert.assertTrue(backOfficeDashboardPage.getAccountButton().isDisplayed());
     }
 
 
@@ -76,5 +80,40 @@ public class DefinitionsSteps {
     public void userClickOnLoginButton() {
         loginPage.waitUntilElementToBeClickable(TIME_TO_WAIT,loginPage.getLoginButton());
         loginPage.clickOnLoginButton();
+    }
+
+    @When("User click on additional login methods button")
+    public void userClickOnAdditionalLoginMethodsButton() {
+        loginPage.clickOnAdditionalLoginMethodButton();
+    }
+
+    @And("User click on standart login button")
+    public void userClickOnStandartLoginButton() {
+        loginPage.waitUntilElementToBeClickable(TIME_TO_WAIT,loginPage.getStandartLoginButton());
+        loginPage.clickOnStandartLoginButton();
+    }
+
+    @And("User click on standartLogin email field and enter {string}")
+    public void userClickOnStandartLoginTextFieldAndEnter(String login) {
+        loginPage.waitUntilElementToBeClickable(TIME_TO_WAIT,loginPage.getStandartLoginEmailTextField());
+        loginPage.clickOnStandartEmailTextFieldAndTextLogin(login);
+    }
+
+    @And("User click on standartLogin Password text field and enter {string}")
+    public void userClickOnStandartLoginPasswordTextFieldAndEnter(String arg0) {
+        loginPage.clickOnStandartLoginPasswordTextFieldAndTextLogin(arg0);
+    }
+
+    @And("User click on signIn button")
+    public void userClickOnSignInButton() {
+        loginPage.clickOnSignInButton();
+    }
+
+
+    @Then("User verify that login to the system is not successful {string}")
+    public void userVerifyThatLoginToTheSystemIsNotSuccessful(String errorMessage) {
+        loginPage.waitForPageLoadComplete(TIME_TO_WAIT);
+        Assert.assertTrue(loginPage.getAllertOnLoginPage());
+        Assert.assertEquals(errorMessage,loginPage.getErrorMessageOnLoginPage());
     }
 }

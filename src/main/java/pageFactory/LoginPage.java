@@ -18,6 +18,18 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = "//button[@class='log-btn']")
     private WebElement loginButton;
+    @FindBy(xpath = "//a[contains(text(),\"Show additional login methods\")]")
+    private WebElement additionalLoginMethods;
+    @FindBy(xpath = "//span[contains(text(),\"Standard Login\")]")
+    private WebElement standartLoginButton;
+    @FindBy(xpath = "//input[@placeholder='Email']")
+    private WebElement standartLoginEmailTextField;
+    @FindBy(xpath = "//input[@placeholder='Password']")
+    private WebElement standartLoginPasswordTextField;
+    @FindBy(xpath = "//button[@type='button']")
+    private WebElement signInButton;
+    @FindBy(xpath = "//span[@class='alert']")
+    private WebElement errorMessageOnLogin;
     public LoginPage(WebDriver driver) {
         super(driver);
     }
@@ -44,6 +56,35 @@ public class LoginPage extends BasePage {
     public void clickOnLoginButton(){
 
         loginButton.click();
+    }
+    public void clickOnAdditionalLoginMethodButton(){
+        additionalLoginMethods.click();
+    }
+    public void clickOnStandartLoginButton(){
+        standartLoginButton.click();
+    }
+    public WebElement getStandartLoginButton(){
+        return standartLoginButton;
+    }
+    public void clickOnStandartEmailTextFieldAndTextLogin(String email){
+        standartLoginPasswordTextField.clear();
+        standartLoginEmailTextField.sendKeys(email);
+    }
+    public WebElement getStandartLoginEmailTextField(){
+        return standartLoginEmailTextField;
+    }
+    public void clickOnStandartLoginPasswordTextFieldAndTextLogin(String password){
+        standartLoginPasswordTextField.clear();
+        standartLoginPasswordTextField.sendKeys(password);
+    }
+    public void clickOnSignInButton(){
+        signInButton.click();
+    }
+    public boolean getAllertOnLoginPage(){
+        return errorMessageOnLogin.isDisplayed();
+    }
+    public String getErrorMessageOnLoginPage (){
+        return errorMessageOnLogin.getText();
     }
 
     }
