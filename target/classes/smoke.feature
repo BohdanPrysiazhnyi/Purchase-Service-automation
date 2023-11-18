@@ -5,7 +5,7 @@ Feature: Smoke
 
 
   Scenario Outline: Login to the BO and Purchase Service with Auth service
-    Given User opens start page '<loginPageUrl>'
+    Given User opens start page
     When User click on HFN login button
     And User click on Login text field and enter '<login>'
     And User click on Password text field and enter '<password>'
@@ -13,11 +13,11 @@ Feature: Smoke
     Then User verify that login to the system is successful
 
     Examples:
-      | loginPageUrl                                      | login         | password   |
-      | http://dashboard-5925.trademax-test.com/spa/login | test.testsson | pt72r=P+=_ |
+      | login         | password   |
+      | test.testsson | pt72r=P+=_ |
 
   Scenario Outline: Login to the BO and Purchase Service with standart login
-    Given User opens start page '<loginPageUrl>'
+    Given User opens start page
     When User click on additional login methods button
     And User click on standart login button
     And User click on standartLogin email field and enter '<login>'
@@ -27,11 +27,12 @@ Feature: Smoke
 
 
     Examples:
-      | loginPageUrl                                      | login            | password |
-      | http://dashboard-5925.trademax-test.com/spa/login | test@example.com | test     |
+      | login            | password |
+      | test@example.com | test     |
+
 
   Scenario Outline: Login to the BO and Purchase Service with wrong Auth service credentials
-    Given User opens start page '<loginPageUrl>'
+    Given User opens start page
     When User click on HFN login button
     And User click on Login text field and enter '<login>'
     And User click on Password text field and enter '<password>'

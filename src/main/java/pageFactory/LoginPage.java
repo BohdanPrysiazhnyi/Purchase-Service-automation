@@ -30,13 +30,16 @@ public class LoginPage extends BasePage {
     private WebElement signInButton;
     @FindBy(xpath = "//span[@class='alert']")
     private WebElement errorMessageOnLogin;
+    @FindBy(xpath = "//div[@class='ivu-notice-desc']")
+    private WebElement errorMessage;
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
-    public void openLoginPage(String url) {
-        driver.get(url);
-    }
+
+//    public void openLoginPage(String url) {
+//        driver.get(url);
+//    }
     public void clickOnHFNButton(){
         hfnButton.click();
     }
@@ -86,6 +89,8 @@ public class LoginPage extends BasePage {
     public String getErrorMessageOnLoginPage (){
         return errorMessageOnLogin.getText();
     }
+    public boolean isErrorMessageApeared(){return errorMessage.isDisplayed();}
+    public WebElement getErrorMessagePopup(){return errorMessage;}
 
     }
 

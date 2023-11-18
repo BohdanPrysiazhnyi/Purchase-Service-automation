@@ -7,6 +7,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
+import pageFactory.AppManager;
 import pageFactory.backofficepages.BackOfficeDashboardPage;
 import pageFactory.LoginPage;
 import pageFactory.purchaseservicepages.PurchaseServiceDashboardPage;
@@ -18,7 +19,8 @@ public class BaseTest {
 
     private WebDriver driver;
     private WebDriverWait wait;
-    private static final String PURCHASE_SERVICE_URL = "http://dashboard-5925.trademax-test.com/page/dashboard";
+    private AppManager appManager;
+//    private static final String PURCHASE_SERVICE_URL = "http://dashboard-5925.trademax-test.com/page/dashboard";
 
 
     @BeforeTest
@@ -28,9 +30,11 @@ public class BaseTest {
 
     @BeforeMethod
     public void tests_setUp(){
+        appManager = new AppManager();
+        appManager.init();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get(PURCHASE_SERVICE_URL);
+        driver.get(appManager.BASE_URL);
     }
 
     @AfterMethod
