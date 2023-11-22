@@ -1,6 +1,5 @@
 package stepdefinitions;
 
-import com.google.common.io.Files;
 import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
@@ -12,7 +11,6 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import manager.PageFactoryManager;
 import org.apache.commons.io.FileUtils;
-import org.junit.Assert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +22,6 @@ import pageFactory.purchaseservicepages.PurchaseServiceDashboardPage;
 import pageFactory.purchaseservicepages.PurchaseServiceGeneral;
 import pageFactory.purchaseservicepages.PurchaseServiceOrdersListPage;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -106,8 +103,8 @@ public class DefinitionsSteps {
     @Then("User verify that login to the system is successful")
     public void userVerifyThatLoginToTheSystemIsSuccessful() {
         backOfficeDashboardPage = new BackOfficeDashboardPage(driver);
-        backOfficeDashboardPage.waitUntilElementToBeClickable(TIME_TO_WAIT,backOfficeDashboardPage.getAccountButton());
-        assertTrue(backOfficeDashboardPage.getAccountButton().isDisplayed());
+        backOfficeDashboardPage.waitUntilElementToBeClickable(TIME_TO_WAIT,backOfficeDashboardPage.getLogOutButton());
+        assertTrue(backOfficeDashboardPage.getLogOutButton().isDisplayed());
 
     }
 
@@ -131,6 +128,7 @@ public class DefinitionsSteps {
 
     @And("User click on standartLogin email field and enter {string}")
     public void userClickOnStandartLoginTextFieldAndEnter(String login) {
+        Allure.parameter("Login", login);
         loginPage.waitUntilElementToBeClickable(TIME_TO_WAIT,loginPage.getStandartLoginEmailTextField());
         loginPage.clickOnStandartEmailTextFieldAndTextLogin(login);
     }

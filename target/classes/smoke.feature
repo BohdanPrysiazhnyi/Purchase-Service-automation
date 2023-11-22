@@ -1,3 +1,4 @@
+@allure.label.epic:Smoke
 Feature: Smoke
   As a user
   I want to test all main site functionality
@@ -28,7 +29,7 @@ Feature: Smoke
 
     Examples:
       | login            | password |
-      | test@example.com | test     |
+      | test@example.com | test  1  |
 
 
   Scenario Outline: Login to the BO and Purchase Service with wrong Auth service credentials
@@ -40,7 +41,7 @@ Feature: Smoke
     Then User verify that login to the system is not successful '<errorMessage>'
 
     Examples:
-      | loginPageUrl                                      | login         | password  | errorMessage                                |
-      | http://dashboard-5925.trademax-test.com/spa/login | test.testsson | pt72r=P+= | These credentials do not match our records. |
+      | login         | password  | errorMessage                                |
+      | test.testsson | pt72r=P+= | These credentials do not match our records. |
 
 

@@ -15,8 +15,8 @@ public class BackOfficeDashboardPage extends BasePage {
 
     @FindBy(xpath = "//button[@type='button']//span[contains(text(),'Create widget')]")
     private WebElement createWidgetButton;
-    @FindBy(xpath = "//div[@class='account-link ivu-menu-item']//a[@href='/spa/profile/2673']")
-    private WebElement accountButton;
+    @FindBy(xpath = "//i[@class='ivu-icon ivu-icon-md-log-out']")
+    private WebElement logOutButton;
     public BackOfficeDashboardPage(WebDriver driver) {
         super(driver);
     }
@@ -29,7 +29,7 @@ public class BackOfficeDashboardPage extends BasePage {
     }
     public void clickOnPurchaseServiceButton(){purchaseServiceButton.click();}
     public void clickOnCreateWidgetButton(){ createWidgetButton.click();}
-    public WebElement getAccountButton(){return accountButton;}
+    public WebElement getLogOutButton(){return logOutButton;}
 
 
 
