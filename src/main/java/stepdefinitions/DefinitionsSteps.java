@@ -3,6 +3,7 @@ package stepdefinitions;
 import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -22,6 +23,7 @@ import pageFactory.purchaseservicepages.PurchaseServiceDashboardPage;
 import pageFactory.purchaseservicepages.PurchaseServiceGeneral;
 import pageFactory.purchaseservicepages.PurchaseServiceOrdersListPage;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -41,7 +43,7 @@ public class DefinitionsSteps {
     WebDriver driver;
     AppManager appManager;
 
-    private static int TIME_TO_WAIT = 10;
+    private static int TIME_TO_WAIT = 20;
 
 
 
@@ -57,22 +59,12 @@ public class DefinitionsSteps {
 
     }
     @After
-    public void tearDown() {
-        driver.quit();
-    }
-    @Attachment(value = "Screenshot", type = "image/png")
-
-    @AfterStep
-    public void afterStep(io.cucumber.java.Scenario scenario) throws IOException {
-        if (scenario.isFailed()) {
-            // Capture screenshot and attach to Allure report
-            takeScreenshot();
+    public void tearDown(Scenario scenario) {
+        if(scenario.isFailed()){
+            byte[] screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+            Allure.addAttachment("Failed Screenshot", new ByteArrayInputStream(screenshot));
         }
-    }
-    @Attachment(type = "image/png")
-    private void takeScreenshot() throws IOException {
-        File screenshotAs = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        Allure.addAttachment("Screenshot", FileUtils.openInputStream(screenshotAs));
+        driver.quit();
     }
 
     @Given("User opens start page")
@@ -103,7 +95,8 @@ public class DefinitionsSteps {
     @Then("User verify that login to the system is successful")
     public void userVerifyThatLoginToTheSystemIsSuccessful() {
         backOfficeDashboardPage = new BackOfficeDashboardPage(driver);
-        backOfficeDashboardPage.waitUntilElementToBeClickable(TIME_TO_WAIT,backOfficeDashboardPage.getLogOutButton());
+        backOfficeDashboardPage.waitForPageLoadComplete(TIME_TO_WAIT);
+        backOfficeDashboardPage.waitUntilElementToBeClickable(TIME_TO_WAIT, backOfficeDashboardPage.getLogOutButton());
         assertTrue(backOfficeDashboardPage.getLogOutButton().isDisplayed());
 
     }
@@ -149,5 +142,39 @@ public class DefinitionsSteps {
         loginPage.waitForPageLoadComplete(TIME_TO_WAIT);
         assertTrue(loginPage.getAllertOnLoginPage());
         assertEquals(errorMessage,loginPage.getErrorMessageOnLoginPage());
+    }
+
+    @Then("User verify that login to the system is not successful")
+    public void userVerifyThatLoginToTheSystemIsNotSuccessful() {
+        loginPage.waitVisibilityOfElement(TIME_TO_WAIT,loginPage.getErrorMessagePopup());
+        assertTrue(loginPage.isErrorPopUpDisplayed());
+    }
+
+    @And("User click on change service button")
+    public void userClickOnChangeServiceButton() {
+        backOfficeDashboardPage = pageFactoryManager.getBackOfficeDashboardPage();
+        backOfficeDashboardPage.waitUntilElementToBeClickable(TIME_TO_WAIT,backOfficeDashboardPage.getChangeServiceButton());
+        backOfficeDashboardPage.clickOnChangeServiceButton();
+    }
+
+    @Then("User verify that all default widgets are displayed on the Purchase Service Dashboard page")
+    public void userVerifyThatAllDefaultWidgetsAreDisplayedOnThePurchaseServiceDashboardPage() {
+        purchaseServiceDashboardPage = pageFactoryManager.getPurchaseServiceDashboardPage();
+        purchaseServiceDashboardPage.waitVisibilityOfElement(TIME_TO_WAIT,purchaseServiceDashboardPage.widget());
+        purchaseServiceDashboardPage.waitUntilElementToBeClickable(TIME_TO_WAIT, purchaseServiceDashboardPage.widget());
+        assertEquals( 8, purchaseServiceDashboardPage.quantityOfDisplayedWidgets());
+    }
+
+    @And("User click on Purchase Service button")
+    public void userClickOnPurchaseServiceButton() {
+        backOfficeDashboardPage.clickOnPurchaseServiceButton();
+    }
+
+    @And("User click on the Purchase Orders list tab")
+    public void userClickOnThePurchaseOrdersListTab() {
+        purchaseServiceDashboardPage = pageFactoryManager.getPurchaseServiceDashboardPage();
+        purchaseServiceGeneral = pageFactoryManager.getPurchaseServiceGeneral();
+        purchaseServiceGeneral.waitUntilElementToBeClickable(TIME_TO_WAIT,purchaseServiceGeneral.getPurchaseOrdersListButton());
+        purchaseServiceOrdersListPage = pageFactoryManager.getPurchaseServiceOrdersListPage();
     }
 }

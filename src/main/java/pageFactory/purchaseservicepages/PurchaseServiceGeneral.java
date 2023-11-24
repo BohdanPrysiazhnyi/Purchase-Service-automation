@@ -10,12 +10,13 @@ public class PurchaseServiceGeneral extends BasePage {
         super(driver);
     }
     @FindBy(xpath = "//a//span[contains(text(),\"Purchase Orders\")]")
-    private WebElement purchaseOrdersListPage;
+    private WebElement purchaseOrdersListPageButton;
 
 
 
 
     public void clickOnPurchaseOrdersListPage(){
-        purchaseOrdersListPage.click();
+        purchaseOrdersListPageButton.click();
     }
+    public WebElement getPurchaseOrdersListButton (){return purchaseOrdersListPageButton;}
 }

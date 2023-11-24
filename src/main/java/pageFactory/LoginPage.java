@@ -32,6 +32,8 @@ public class LoginPage extends BasePage {
     private WebElement errorMessageOnLogin;
     @FindBy(xpath = "//div[@class='ivu-notice-desc']")
     private WebElement errorMessage;
+    @FindBy(xpath = "//div[contains(text(),\"Login or password does not match\")]")
+    private WebElement errorPopUpOnTheLoginPage;
     public LoginPage(WebDriver driver) {
         super(driver);
     }
@@ -91,6 +93,8 @@ public class LoginPage extends BasePage {
     }
     public boolean isErrorMessageApeared(){return errorMessage.isDisplayed();}
     public WebElement getErrorMessagePopup(){return errorMessage;}
+    public boolean isErrorPopUpDisplayed(){return errorPopUpOnTheLoginPage.isDisplayed();}
+    public WebElement getErrorPopUpOnTheLoginPage(){return errorPopUpOnTheLoginPage;}
 
     }
 
