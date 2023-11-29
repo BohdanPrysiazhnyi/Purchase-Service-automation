@@ -80,6 +80,8 @@ Feature: Smoke
     When User click on change service button
     And User click on Purchase Service button
     And User click on the Purchase Orders list tab
+    And User click on the first Purchase Order docNo from list
+
 
     Examples:
       | login         | password   |

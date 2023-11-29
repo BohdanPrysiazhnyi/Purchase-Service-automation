@@ -12,6 +12,7 @@ import pageFactory.backofficepages.BackOfficeDashboardPage;
 import pageFactory.LoginPage;
 import pageFactory.purchaseservicepages.PurchaseServiceDashboardPage;
 import pageFactory.purchaseservicepages.PurchaseServiceGeneral;
+import pageFactory.purchaseservicepages.PurchaseServiceOrdersListPage;
 
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 
@@ -60,5 +61,6 @@ public class BaseTest {
     }
     public PurchaseServiceDashboardPage getPurchaseServiceDashboardPage(){return new PurchaseServiceDashboardPage(getDriver());}
     public PurchaseServiceGeneral getPurchaseServiceGeneral(){return new PurchaseServiceGeneral(getDriver());}
+    public PurchaseServiceOrdersListPage getPurchaseServiceOrdersListPage(){return new PurchaseServiceOrdersListPage(getDriver());}
 
 }

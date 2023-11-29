@@ -19,6 +19,13 @@ public class SmokeTests extends BaseTest{
         getBackOfficeDashboardPage().clickOnChangeServiceButton();
         getBackOfficeDashboardPage().clickOnPurchaseServiceButton();
         getPurchaseServiceDashboardPage().waitUntilElementToBeClickable(30, getPurchaseServiceDashboardPage().widget());
-        Assert.assertEquals(getPurchaseServiceDashboardPage().quantityOfDisplayedWidgets(),8);
+        getPurchaseServiceGeneral().clickOnPurchaseOrdersListPage();
+
+        getPurchaseServiceOrdersListPage().waitForPageLoadComplete(TIME_TO_WAIT);
+        getPurchaseServiceOrdersListPage().clickOnFirstPurchaseOrderDocNo();
+        getPurchaseServiceOrdersListPage().waitUntilElementToBeClickable(TIME_TO_WAIT, getPurchaseServiceOrdersListPage().getFirstPurchaseOrdersDocNo());
+        getPurchaseServiceOrdersListPage().clickOnPurchaseLinesTabButton();
+        Assert.assertEquals(getPurchaseServiceOrdersListPage().quantityOfPurchaseOrdersDisplayedOnThePage(),8);
+//        Assert.assertEquals(getPurchaseServiceDashboardPage().quantityOfDisplayedWidgets(),8);
     }
 }

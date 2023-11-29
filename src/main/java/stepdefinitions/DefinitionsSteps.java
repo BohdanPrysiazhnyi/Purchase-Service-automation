@@ -16,6 +16,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pageFactory.AppManager;
 import pageFactory.LoginPage;
 import pageFactory.backofficepages.BackOfficeDashboardPage;
@@ -26,13 +28,14 @@ import pageFactory.purchaseservicepages.PurchaseServiceOrdersListPage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static org.junit.Assert.*;
 
 
 public class DefinitionsSteps {
-  
+
     LoginPage loginPage;
     BackOfficeDashboardPage backOfficeDashboardPage;
     PurchaseServiceGeneral purchaseServiceGeneral;
@@ -46,9 +49,8 @@ public class DefinitionsSteps {
     private static int TIME_TO_WAIT = 20;
 
 
-
     @Before
-    public void setUp(){
+    public void setUp() {
         appManager = new AppManager();
         appManager.init();
         chromedriver().setup();
@@ -58,10 +60,11 @@ public class DefinitionsSteps {
         driver.get(appManager.BASE_URL);
 
     }
+
     @After
     public void tearDown(Scenario scenario) {
-        if(scenario.isFailed()){
-            byte[] screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+        if (scenario.isFailed()) {
+            byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             Allure.addAttachment("Failed Screenshot", new ByteArrayInputStream(screenshot));
         }
         driver.quit();
@@ -75,7 +78,7 @@ public class DefinitionsSteps {
 
     @When("User click on HFN login button")
     public void userClickOnHFNLoginButton() {
-        loginPage.waitUntilElementToBeClickable(TIME_TO_WAIT,loginPage.getHfnButton());
+        loginPage.waitUntilElementToBeClickable(TIME_TO_WAIT, loginPage.getHfnButton());
         loginPage.clickOnHFNButton();
     }
 
@@ -90,8 +93,6 @@ public class DefinitionsSteps {
     }
 
 
-
-
     @Then("User verify that login to the system is successful")
     public void userVerifyThatLoginToTheSystemIsSuccessful() {
         backOfficeDashboardPage = new BackOfficeDashboardPage(driver);
@@ -104,7 +105,7 @@ public class DefinitionsSteps {
 
     @And("User click on login button")
     public void userClickOnLoginButton() {
-        loginPage.waitUntilElementToBeClickable(TIME_TO_WAIT,loginPage.getLoginButton());
+        loginPage.waitUntilElementToBeClickable(TIME_TO_WAIT, loginPage.getLoginButton());
         loginPage.clickOnLoginButton();
     }
 
@@ -115,14 +116,14 @@ public class DefinitionsSteps {
 
     @And("User click on standart login button")
     public void userClickOnStandartLoginButton() {
-        loginPage.waitUntilElementToBeClickable(TIME_TO_WAIT,loginPage.getStandartLoginButton());
+        loginPage.waitUntilElementToBeClickable(TIME_TO_WAIT, loginPage.getStandartLoginButton());
         loginPage.clickOnStandartLoginButton();
     }
 
     @And("User click on standartLogin email field and enter {string}")
     public void userClickOnStandartLoginTextFieldAndEnter(String login) {
         Allure.parameter("Login", login);
-        loginPage.waitUntilElementToBeClickable(TIME_TO_WAIT,loginPage.getStandartLoginEmailTextField());
+        loginPage.waitUntilElementToBeClickable(TIME_TO_WAIT, loginPage.getStandartLoginEmailTextField());
         loginPage.clickOnStandartEmailTextFieldAndTextLogin(login);
     }
 
@@ -141,28 +142,28 @@ public class DefinitionsSteps {
     public void userVerifyThatLoginToTheSystemIsNotSuccessful(String errorMessage) {
         loginPage.waitForPageLoadComplete(TIME_TO_WAIT);
         assertTrue(loginPage.getAllertOnLoginPage());
-        assertEquals(errorMessage,loginPage.getErrorMessageOnLoginPage());
+        assertEquals(errorMessage, loginPage.getErrorMessageOnLoginPage());
     }
 
     @Then("User verify that login to the system is not successful")
     public void userVerifyThatLoginToTheSystemIsNotSuccessful() {
-        loginPage.waitVisibilityOfElement(TIME_TO_WAIT,loginPage.getErrorMessagePopup());
+        loginPage.waitVisibilityOfElement(TIME_TO_WAIT, loginPage.getErrorMessagePopup());
         assertTrue(loginPage.isErrorPopUpDisplayed());
     }
 
     @And("User click on change service button")
     public void userClickOnChangeServiceButton() {
         backOfficeDashboardPage = pageFactoryManager.getBackOfficeDashboardPage();
-        backOfficeDashboardPage.waitUntilElementToBeClickable(TIME_TO_WAIT,backOfficeDashboardPage.getChangeServiceButton());
+        backOfficeDashboardPage.waitUntilElementToBeClickable(TIME_TO_WAIT, backOfficeDashboardPage.getChangeServiceButton());
         backOfficeDashboardPage.clickOnChangeServiceButton();
     }
 
     @Then("User verify that all default widgets are displayed on the Purchase Service Dashboard page")
     public void userVerifyThatAllDefaultWidgetsAreDisplayedOnThePurchaseServiceDashboardPage() {
         purchaseServiceDashboardPage = pageFactoryManager.getPurchaseServiceDashboardPage();
-        purchaseServiceDashboardPage.waitVisibilityOfElement(TIME_TO_WAIT,purchaseServiceDashboardPage.widget());
+        purchaseServiceDashboardPage.waitForVisibilityOfListOfElements(TIME_TO_WAIT, purchaseServiceDashboardPage.getList());
         purchaseServiceDashboardPage.waitUntilElementToBeClickable(TIME_TO_WAIT, purchaseServiceDashboardPage.widget());
-        assertEquals( 8, purchaseServiceDashboardPage.quantityOfDisplayedWidgets());
+        assertEquals(purchaseServiceDashboardPage.quantityOfDisplayedWidgets(), 8);
     }
 
     @And("User click on Purchase Service button")
@@ -172,9 +173,15 @@ public class DefinitionsSteps {
 
     @And("User click on the Purchase Orders list tab")
     public void userClickOnThePurchaseOrdersListTab() {
-        purchaseServiceDashboardPage = pageFactoryManager.getPurchaseServiceDashboardPage();
         purchaseServiceGeneral = pageFactoryManager.getPurchaseServiceGeneral();
-        purchaseServiceGeneral.waitUntilElementToBeClickable(TIME_TO_WAIT,purchaseServiceGeneral.getPurchaseOrdersListButton());
+        purchaseServiceGeneral.waitUntilElementToBeClickable(TIME_TO_WAIT, purchaseServiceGeneral.getPurchaseOrdersListButton());
+        purchaseServiceGeneral.clickOnPurchaseOrdersListPage();
+    }
+
+    @And("User click on the first Purchase Order docNo from list")
+    public void userClickOnTheFirstPurchaseOrderDocNoFromList() {
         purchaseServiceOrdersListPage = pageFactoryManager.getPurchaseServiceOrdersListPage();
+        purchaseServiceOrdersListPage.waitForVisibilityOfListOfElements(TIME_TO_WAIT, purchaseServiceOrdersListPage.getListOfPurchaseOrdersDocNo());
+        purchaseServiceOrdersListPage.clickOnFirstPurchaseOrderDocNo();
     }
 }

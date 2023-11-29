@@ -8,24 +8,26 @@ import java.util.Properties;
 public class AppManager {
 
     public Properties properties;
-    public static   String BROWSER = "";
-    public static  String DB_URL = "";
-    public static  String DB_USERNAME = "";
-    public static  String DB_PASSWORD = "";
-    public static  String BASE_URL;
-    public static  String USER_STANDART_LOGIN = "";
-    public static  String USER_STANDART_PASSWORD = "";
-    public static  String USER_AUTH_LOGIN = "";
-    public static  String USER_AUTH_PASSWORD = "";
-    public static  String CUSTOMER_FIRST_NAME = "";
-    public static  String CUSTOMER_LAST_NAME = "";
-    public static  String CUSTOMER_ADDRESS = "";
-    public static  String CUSTOMER_POSTCODE = "";
-    public static  String CUSTOMER_CITY = "";
-    public static  String CUSTOMER_EMAIL = "";
-    public static  String CUSTOMER_PHONE = "";
+    public static String BROWSER = "";
+    public static String DB_URL = "";
+    public static String DB_USERNAME = "";
+    public static String DB_PASSWORD = "";
+    public static String BASE_URL;
+    public static String USER_STANDART_LOGIN = "";
+    public static String USER_STANDART_PASSWORD = "";
+    public static String USER_AUTH_LOGIN = "";
+    public static String USER_AUTH_PASSWORD = "";
+    public static String CUSTOMER_FIRST_NAME = "";
+    public static String CUSTOMER_LAST_NAME = "";
+    public static String CUSTOMER_ADDRESS = "";
+    public static String CUSTOMER_POSTCODE = "";
+    public static String CUSTOMER_CITY = "";
+    public static String CUSTOMER_EMAIL = "";
+    public static String CUSTOMER_PHONE = "";
 
-    public AppManager () {properties = new Properties();}
+    public AppManager() {
+        properties = new Properties();
+    }
 
     public void init() {
         getDataFromPropertiesFile();
@@ -33,7 +35,7 @@ public class AppManager {
 
     public void getDataFromPropertiesFile() {
         try {
-         properties.load(new FileReader("/Users/bprysiazhnyi/IdeaProjects/Purchase-Service-automation/src/main/resources/config.properties"));
+            properties.load(new FileReader("/Users/bprysiazhnyi/IdeaProjects/Purchase-Service-automation/src/main/resources/config.properties"));
 
         } catch (IOException e) {
             e.printStackTrace();

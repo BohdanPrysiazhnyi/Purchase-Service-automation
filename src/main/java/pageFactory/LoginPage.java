@@ -34,67 +34,95 @@ public class LoginPage extends BasePage {
     private WebElement errorMessage;
     @FindBy(xpath = "//div[contains(text(),\"Login or password does not match\")]")
     private WebElement errorPopUpOnTheLoginPage;
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
 
-//    public void openLoginPage(String url) {
+    //    public void openLoginPage(String url) {
 //        driver.get(url);
 //    }
-    public void clickOnHFNButton(){
+    public void clickOnHFNButton() {
         hfnButton.click();
     }
-    public WebElement getHfnButton(){return hfnButton;}
-    public WebElement getLoginButton(){return loginButton;}
 
-    public void clickOnLoginTextFieldAndEnterLogin(final String LOGIN){
+    public WebElement getHfnButton() {
+        return hfnButton;
+    }
+
+    public WebElement getLoginButton() {
+        return loginButton;
+    }
+
+    public void clickOnLoginTextFieldAndEnterLogin(final String LOGIN) {
         loginTextField.clear();
         loginTextField.sendKeys(LOGIN);
     }
 
-    public void clickOnPasswordTextFieldAndEnterPassword(final String PASSWORD){
+    public void clickOnPasswordTextFieldAndEnterPassword(final String PASSWORD) {
         passwordTextField.clear();
         passwordTextField.sendKeys(PASSWORD);
     }
 
-    public void clickOnLoginButton(){
+    public void clickOnLoginButton() {
 
         loginButton.click();
     }
-    public void clickOnAdditionalLoginMethodButton(){
+
+    public void clickOnAdditionalLoginMethodButton() {
         additionalLoginMethods.click();
     }
-    public void clickOnStandartLoginButton(){
+
+    public void clickOnStandartLoginButton() {
         standartLoginButton.click();
     }
-    public WebElement getStandartLoginButton(){
+
+    public WebElement getStandartLoginButton() {
         return standartLoginButton;
     }
-    public void clickOnStandartEmailTextFieldAndTextLogin(String email){
+
+    public void clickOnStandartEmailTextFieldAndTextLogin(String email) {
         standartLoginPasswordTextField.clear();
         standartLoginEmailTextField.sendKeys(email);
     }
-    public WebElement getStandartLoginEmailTextField(){
+
+    public WebElement getStandartLoginEmailTextField() {
         return standartLoginEmailTextField;
     }
-    public void clickOnStandartLoginPasswordTextFieldAndTextLogin(String password){
+
+    public void clickOnStandartLoginPasswordTextFieldAndTextLogin(String password) {
         standartLoginPasswordTextField.clear();
         standartLoginPasswordTextField.sendKeys(password);
     }
-    public void clickOnSignInButton(){
+
+    public void clickOnSignInButton() {
         signInButton.click();
     }
-    public boolean getAllertOnLoginPage(){
+
+    public boolean getAllertOnLoginPage() {
         return errorMessageOnLogin.isDisplayed();
     }
-    public String getErrorMessageOnLoginPage (){
+
+    public String getErrorMessageOnLoginPage() {
         return errorMessageOnLogin.getText();
     }
-    public boolean isErrorMessageApeared(){return errorMessage.isDisplayed();}
-    public WebElement getErrorMessagePopup(){return errorMessage;}
-    public boolean isErrorPopUpDisplayed(){return errorPopUpOnTheLoginPage.isDisplayed();}
-    public WebElement getErrorPopUpOnTheLoginPage(){return errorPopUpOnTheLoginPage;}
 
+    public boolean isErrorMessageApeared() {
+        return errorMessage.isDisplayed();
     }
+
+    public WebElement getErrorMessagePopup() {
+        return errorMessage;
+    }
+
+    public boolean isErrorPopUpDisplayed() {
+        return errorPopUpOnTheLoginPage.isDisplayed();
+    }
+
+    public WebElement getErrorPopUpOnTheLoginPage() {
+        return errorPopUpOnTheLoginPage;
+    }
+
+}
 

@@ -9,18 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PurchaseServiceDashboardPage extends BasePage {
+    @FindBy(xpath = "//div[@class='LUeq']")
+    private List<WebElement> purchaseServiceWidgets;
+
     public PurchaseServiceDashboardPage(WebDriver driver) {
         super(driver);
     }
 
-    @FindBy(xpath = "//div[@class='LUeq']")
-    private ArrayList<WebElement> purchaseServiceWidgets;
 
-
-    public int quantityOfDisplayedWidgets(){
+    public int quantityOfDisplayedWidgets() {
         return purchaseServiceWidgets.size();
     }
-    public WebElement widget(){
+
+    public WebElement widget() {
         return purchaseServiceWidgets.get(0);
+    }
+    public List<WebElement> getList(){
+        return purchaseServiceWidgets;
     }
 }
