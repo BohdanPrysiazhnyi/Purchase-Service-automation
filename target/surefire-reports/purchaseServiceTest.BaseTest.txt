@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: purchaseServiceTest.BaseTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 2.046 sec <<< FAILURE!
+closeAllWindows(purchaseServiceTest.BaseTest)  Time elapsed: 2 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.WebDriver.quit()" because "this.driver" is null
+	at purchaseServiceTest.BaseTest.closeAllWindows(BaseTest.java:43)
+
